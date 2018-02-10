@@ -1,0 +1,90 @@
+<layout version="1.0.0">
+    <default>
+    	<reference name="head">		
+			<action method="addItem"><type>skin_css</type><name>marketplace/css/style.css</name></action>
+			<reference name="header">
+				<action method="setTemplate">
+					<template>marketplace/page/header.phtml</template>
+				</action> 
+			</reference>
+		</reference>	
+    </default>
+	<admin_marketplace_adminhtml_login_index>
+	   <block type="core/text_list" name="root" output="toHtml">
+            <block type="adminhtml/template" name="content" template="marketplace/login.phtml">
+                <block type="core/text_list" name="form.additional.info" />
+            </block>
+        </block>
+	</admin_marketplace_adminhtml_login_index>
+	<adminhtml_catalog_product_new>
+        <reference name="product_edit">
+            <action method="setTemplate">
+                <template>marketplace/catalog/product/edit.phtml</template>
+            </action> 
+        </reference>
+    </adminhtml_catalog_product_new>
+    <adminhtml_catalog_product_edit>
+        <reference name="product_edit">
+            <action method="setTemplate">
+                <template>marketplace/catalog/product/edit.phtml</template>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+	<admin_marketplace_adminhtml_order_view>
+	</admin_marketplace_adminhtml_order_view>
+	<admin_marketplace_adminhtml_shipment_new>
+        <reference name="head">
+            <action method="addJs"><file>mage/adminhtml/sales/packaging.js</file></action>
+        </reference>
+        <reference name="content">
+            <block type="adminhtml/sales_order_shipment_create" name="marketplace_sales_shipment_create">
+                <block type="marketplace/adminhtml_order_shipment_create_form" name="form" template="marketplace/sales/order/shipment/create/form.phtml">
+                    <block type="marketplace/adminhtml_order_edit_form" name="order_info"></block>
+                    <!-- <block type="adminhtml/sales_order_payment" name="order_payment"></block>-->
+                    <block type="adminhtml/sales_order_shipment_create_tracking" name="shipment_tracking" template="sales/order/shipment/create/tracking.phtml"></block>
+                   </block>
+            </block>
+        </reference>
+    </admin_marketplace_adminhtml_shipment_new>
+	
+	<admin_marketplace_adminhtml_shipment_addtrack>
+        <block type="adminhtml/sales_order_shipment_view_tracking" name="shipment_tracking" template="sales/order/shipment/view/tracking.phtml"></block>
+    </admin_marketplace_adminhtml_shipment_addtrack>
+
+    <admin_marketplace_adminhtml_shipment_removetrack>
+        <block type="adminhtml/sales_order_shipment_view_tracking" name="shipment_tracking" template="sales/order/shipment/view/tracking.phtml"></block>
+    </admin_marketplace_adminhtml_shipment_removetrack>
+	
+	<admin_marketplace_adminhtml_shipment_addcomment>
+        <block type="adminhtml/sales_order_shipment_view_comments" name="shipment_comments">
+            <block type="adminhtml/sales_order_comments_view"  name="order_comments" template="sales/order/comments/view.phtml"></block>
+        </block>
+    </admin_marketplace_adminhtml_shipment_addcomment>
+	
+	<admin_marketplace_adminhtml_shipment_view>
+        <reference name="head">
+            <action method="addJs"><file>mage/adminhtml/sales/packaging.js</file></action>
+        </reference>
+        <reference name="content">
+            <block type="marketplace/adminhtml_shipment_view" name="sales_shipment_view">
+                <block type="marketplace/adminhtml_shipment_view_form" name="form" template="marketplace/sales/order/shipment/view/form.phtml">
+                    <block type="marketplace/adminhtml_order_edit_form" name="order_info"></block>
+                    <!-- <block type="adminhtml/sales_order_payment" name="order_payment"></block> -->
+                    <block type="adminhtml/sales_order_shipment_view_tracking" name="shipment_tracking" template="sales/order/shipment/view/tracking.phtml"></block>
+                    <block type="adminhtml/sales_order_shipment_view_items" name="shipment_items" template="sales/order/shipment/view/items.phtml">
+                        <action method="addItemRender"><type>default</type><block>adminhtml/sales_items_renderer_default</block><template>sales/order/shipment/view/items/renderer/default.phtml</template></action>
+                        <action method="addColumnRender"><column>qty</column><block>adminhtml/sales_items_column_qty</block><template>sales/items/column/qty.phtml</template></action>
+                        <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name</block><template>sales/items/column/name.phtml</template></action>
+                        <block type="core/text_list" name="order_item_extra_info"></block>
+                    </block>
+                    <block type="adminhtml/sales_order_invoice_create_tracking" name="invoice_tracking" template="sales/order/shipment/create/tracking.phtml"></block>
+                    <block type="marketplace/adminhtml_order_comments_view"  name="order_comments" template="marketplace/sales/order/comments/view.phtml">
+                        <action method="setParentType"><type>shipment</type></action>
+                    </block>
+                    <block type="adminhtml/sales_order_shipment_packaging" name="shipment_packaging" template="sales/order/shipment/packaging/popup.phtml" />
+                    <block type="adminhtml/sales_order_shipment_packaging" name="shipment_packed" template="sales/order/shipment/packaging/packed.phtml"/>
+                 </block>
+            </block>
+        </reference>
+    </admin_marketplace_adminhtml_shipment_view>
+</layout>

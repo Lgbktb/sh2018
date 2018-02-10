@@ -1,0 +1,21 @@
+<?php 
+$_item = $this->getItem();
+$adminCommision = $this->getAdminComission(); 
+$sellerItemAmount = $this->getSellerItemAmount();
+?>
+<tr class="border">
+		<td>
+			<div id="order_item_<?php echo $_item->getId() ?>" class="item-container">
+				<div class="item-text">
+					<h5 class="title"><span id="order_item_<?php echo $_item->getId() ?>_title"><?php echo $_item->getName() ?></span></h5>
+					<div><strong>SKU:</strong> <?php echo $_item->getSku() ?></div>
+				</div>
+			</div>
+		</td>
+		<td>
+			<?php if ($_item->getQtyOrdered() > 0):
+				echo '<strong>' . intval($_item->getQtyOrdered()) . '</strong>';
+			endif;?>
+		</td>
+		<input type="hidden" name="shipment[items][<?php echo $_item->getProductId() ?>]" value="<?php echo $_item->getQtyOrdered() ?>" >
+</tr>

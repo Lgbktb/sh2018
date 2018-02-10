@@ -1,0 +1,6 @@
+<?php  
+$_product = Mage::registry('product');
+$sellerInfo = Mage::helper('marketplace')->getSellerInfo($_product); 
+if($sellerInfo)
+echo $this->__("seller: <a href=%s target='_blank'><b>%s</b></a>",Mage::helper('marketplace')->getShopUrl($sellerInfo->getUrlPath()),ucfirst($sellerInfo->getShopName()));
+?>
